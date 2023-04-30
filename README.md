@@ -1,0 +1,2 @@
+# NvimSync
+Personal Neovim Setup
