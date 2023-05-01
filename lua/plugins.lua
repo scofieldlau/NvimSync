@@ -14,24 +14,53 @@ packer.startup(function(use)
   -- Packer itself
   use 'wbthomason/packer.nvim'
 
-  -- Required for many Lua plugins
-  -- use "nvim-lua/plenary.nvim"
+
+  -- Color schemes
+  use 'folke/tokyonight.nvim'
+
+  -- Status bar
+  use 'vim-airline/vim-airline'
+  use 'vim-airline/vim-airline-themes'
+
+  -- Syntax highlighting
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- LSP
-
   use {
 	  "williamboman/mason.nvim",
 	  "williamboman/mason-lspconfig.nvim",
 	  "neovim/nvim-lspconfig",
   }
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
+
+
+  -- Improve neovim lsp expericence
+  use({
+    "glepnir/lspsaga.nvim",
+    opt = true,
+    branch = "main",
+    event = "LspAttach",
+    config = function()
+        require("lspsaga").setup({})
+    end,
+    requires = {
+        {"nvim-tree/nvim-web-devicons"},
+        --Please make sure you install markdown and markdown_inline parser
+        {"nvim-treesitter/nvim-treesitter"}
+    }
+  })
+
+  -- Make LSP client fuzzy
+  use {
+	  'ojroques/nvim-lspfuzzy',
+	  requires = {
+		  {'junegunn/fzf'},
+		  {'junegunn/fzf.vim'},  -- to enable preview (optional)
+	},
+  }
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
 
-  -- Syntax highlighting
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Fuzzy finding
   use {
@@ -52,8 +81,6 @@ packer.startup(function(use)
   -- Dashboard
   use 'glepnir/dashboard-nvim'
 
-  -- Color schemes
-  use 'folke/tokyonight.nvim'
 
   -- Snippets
   use 'L3MON4D3/LuaSnip'

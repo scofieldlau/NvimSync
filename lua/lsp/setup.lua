@@ -48,3 +48,5 @@ require("mason-lspconfig").setup_handlers({
   end,
 })
 
+-- lspfuzzy
+require('lspfuzzy').setup {}
